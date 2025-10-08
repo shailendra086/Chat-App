@@ -1,16 +1,30 @@
-# chat_app
+# Chat App
 
-A new Flutter project.
+A Flutter-based real-time chat application with Firebase backend, allowing users to send messages, create profiles, and receive push notifications instantly.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- User Authentication (Email/Password & Google Sign-In)
+- Real-time messaging using Firebase Firestore
+- Push notifications for new messages
+- User profile with avatar and status
+- Online/offline status
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tech Stack
+
+- Flutter (Dart)
+- Firebase Firestore
+- Firebase Authentication
+- Firebase Cloud Messaging (Push Notifications)
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shailendra086/Chat-App.git
