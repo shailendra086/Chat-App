@@ -8,16 +8,17 @@ class UserModel {
   final bool isOnline;
   final DateTime lastSeen;
   final DateTime createdAt;
+  final String? fcmToken;
 
   UserModel({
     required this.id,
-
     required this.email,
     required this.displayName,
     this.photoURL = '',
     this.isOnline = false,
     required this.lastSeen,
     required this.createdAt,
+    this.fcmToken,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +30,7 @@ class UserModel {
       'isOnline': isOnline,
       'lastSeen': lastSeen,
       'createdAt': createdAt,
+      'fcmToken': fcmToken,
     };
   }
 
@@ -44,10 +46,10 @@ class UserModel {
                 ? (map['lastSeen'] as Timestamp).toDate()
                 : DateTime.fromMillisecondsSinceEpoch(map['lastSeen'] as int))
           : DateTime.now(),
-
       createdAt: map['createdAt'] != null
           ? (map['createdAt'] as Timestamp).toDate()
           : DateTime.now(),
+      fcmToken: map['fcmToken'],
     );
   }
 
@@ -59,6 +61,7 @@ class UserModel {
     bool? isOnline,
     DateTime? lastSeen,
     DateTime? createdAt,
+    String? fcmToken,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -68,6 +71,7 @@ class UserModel {
       isOnline: isOnline ?? this.isOnline,
       lastSeen: lastSeen ?? this.lastSeen,
       createdAt: createdAt ?? this.createdAt,
+      fcmToken: fcmToken ?? this.fcmToken,
     );
   }
 }

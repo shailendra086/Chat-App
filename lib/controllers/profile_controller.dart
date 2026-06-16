@@ -105,7 +105,7 @@ class ProfileController extends GetxController {
 
   Future<void> deleteAccount() async {
     try {
-      final result = Get.dialog(
+      final result = await Get.dialog(
         AlertDialog(
           title: Text("Delete Account"),
           content: Text(

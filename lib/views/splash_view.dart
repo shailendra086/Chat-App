@@ -33,19 +33,18 @@ class _SplashViewState extends State<SplashView>
     );
     _animationController.forward();
 
-   // _checkAuthAndNavigate();
+    _checkAuthAndNavigate();
   }
 
-  // void _checkAuthAndNavigate() async {
-  //   await Future.delayed(Duration(seconds: 2));
-  //   final authController = Get.put(AuthController(), permanent: true);
-  //   await Future.delayed(Duration(milliseconds: 500));
-  //   if (authController.isAuthenticated) {
-  //     Get.offAllNamed(AppRoutes.profile);
-  //   } else {
-  //     Get.offAllNamed(AppRoutes.login);
-  //   }
-  // }
+  void _checkAuthAndNavigate() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final authController = Get.find<AuthController>();
+    if (authController.isAuthenticated) {
+      Get.offAllNamed(AppRoutes.main);
+    } else {
+      Get.offAllNamed(AppRoutes.login);
+    }
+  }
 
   @override
   void dispose() {

@@ -1,8 +1,15 @@
+import 'package:chat_app/controllers/chat_controller.dart';
+import 'package:chat_app/controllers/chat_list_controller.dart';
+import 'package:chat_app/controllers/friend_request_controller.dart';
+import 'package:chat_app/controllers/main_controller.dart';
 import 'package:chat_app/controllers/profile_controller.dart';
+import 'package:chat_app/controllers/user_list_controller.dart';
 import 'package:chat_app/routes/app_routes.dart';
 import 'package:chat_app/views/auth/forgot_password_view.dart';
 import 'package:chat_app/views/auth/login_view.dart';
 import 'package:chat_app/views/auth/register_view.dart';
+import 'package:chat_app/views/chat_view.dart';
+import 'package:chat_app/views/main_view.dart';
 import 'package:chat_app/views/profile_view.dart';
 import 'package:chat_app/views/splash_view.dart';
 import 'package:get/get.dart';
@@ -31,13 +38,17 @@ class AppPages {
     //     Get.put(HomeController());
     //   }),
     // ),
-    // GetPage(
-    //   name: AppRoutes.main,
-    //   page: () => const MainView(),
-    //   binding: BindingsBuilder(() {
-    //     Get.put(MainController());
-    //   }),
-    // ),
+    GetPage(
+      name: AppRoutes.main,
+      page: () => const MainView(),
+      binding: BindingsBuilder(() {
+        Get.put(MainController());
+        Get.put(ProfileController());
+        Get.put(ChatListController());
+        Get.put(UserListController());
+        Get.put(FriendRequestController());
+      }),
+    ),
     GetPage(
       name: AppRoutes.profile,
       page: () => const ProfileView(),
@@ -45,13 +56,13 @@ class AppPages {
         Get.put(ProfileController());
       }),
     ),
-    // GetPage(
-    //   name: AppRoutes.chat,
-    //   page: () => const ChatView(),
-    //   binding: BindingsBuilder(() {
-    //     Get.put(ChatController());
-    //   }),
-    // ),
+    GetPage(
+      name: AppRoutes.chat,
+      page: () => const ChatView(),
+      binding: BindingsBuilder(() {
+        Get.put(ChatController());
+      }),
+    ),
 
     // GetPage(
     //   name: AppRoutes.userList,

@@ -1,6 +1,7 @@
 import 'package:chat_app/models/user_model.dart';
 import 'package:chat_app/routes/app_routes.dart';
 import 'package:chat_app/services/auth_service.dart';
+import 'package:chat_app/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ class AuthController extends GetxController {
   final RxString _error = ''.obs;
   final RxBool _isinitialized = false.obs;
   User? get user => _user.value;
+  Rx<User?> get rxUser => _user;
   UserModel? get userModel => _userModel.value;
   bool get isLoading => _isLoading.value;
   String get error => _error.value;
@@ -23,20 +25,26 @@ class AuthController extends GetxController {
     super.onInit();
     _user.bindStream(_authService.authStateChanges);
     ever(_user, _handleAuthStateChange);
+    ever(_user, (User? u) {
+      if (u != null) {
+        NotificationService().registerUserToken(u.uid);
+      }
+    });
   }
 
   void _handleAuthStateChange(User? user) {
+    if (!_isinitialized.value) {
+      _isinitialized.value = true;
+      return;
+    }
     if (user != null) {
+      if (Get.currentRoute != AppRoutes.main) {
+        Get.offAllNamed(AppRoutes.main);
+      }
+    } else {
       if (Get.currentRoute != AppRoutes.login) {
         Get.offAllNamed(AppRoutes.login);
       }
-    } else {
-      if (Get.currentRoute != AppRoutes.profile) {
-        Get.offAllNamed(AppRoutes.profile);
-      }
-    }
-    if (!_isinitialized.value) {
-      _isinitialized.value = true;
     }
   }
 
@@ -61,8 +69,7 @@ class AuthController extends GetxController {
       );
       if (userModel != null) {
         _userModel.value = userModel;
-        Get.offAllNamed(AppRoutes.profile);
-        //becuase we dont have main page yet
+        Get.offAllNamed(AppRoutes.main);
       }
     } catch (e) {
       _error.value = e.toString();
